@@ -5,23 +5,18 @@ module timer (
 
 	output wire trigger
 );
-//TODO: parameterize module to accept arbitrary time limit
-reg [7:0] state_reg;
-reg trigger_reg;
 
-assign trigger_reg = trigger;
+reg [15:0] state;
 
-always @ (posedge clk or posedge rst)
+always @(posedge clk or negedge rst)
 begin
-	if (rst == 1) begin
-		state_reg <= 8'b0;
-		trigger_reg <= 1'b0;
-		end else if (state_reg == 1000000) begin
-		state_reg <= 8'b0;
-		trigger_reg <= 1'b0;
+
+	if (state == 100000) begin
+		state <= 15'b0;
+		trigger <= 1'b1;
 	end else begin
-		state_reg <= state_reg + 1;
-		trigger_reg <= 1'b0;
+		state <= state + 1'b0;
+		trigger <= 1'b0;
 	end
 end
 

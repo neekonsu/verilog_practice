@@ -16,15 +16,11 @@ timer delay (
 );
 
 always @ (posedge trigger) begin
-	if (leds == 8'b1) begin
+	if (leds == 8'b1 || rst == 1'b0) begin
 		leds <= 8'b0;
 	end else begin
-		leds <= leds + 1;
+		leds <= leds + 1'b1;
 	end
-end
-
-always @ (posedge rst) begin
-	leds <= 8'b0;
 end
 
 endmodule
