@@ -1,0 +1,125 @@
+# PCF hardware definitions for io on Alchitry Cu dev board
+## See Schematic For Source: https://cdn.alchitry.com/docs/alchitry_cu_sch.pdf
+
+# Onboard LEDS (8-bit bank):
+set_io		leds[0]		J11
+set_io		leds[1]		K11
+set_io		leds[2] 	K12
+set_io		leds[3]		K14
+set_io		leds[4]		L12
+set_io		leds[5]		L14
+set_io 		leds[6]		M12
+set_io		leds[7]		N14
+
+# RST Button:
+set_io 		rst				P8
+
+# CLK 100MHz:
+set_io		clk				P7
+
+#	IO Bank A 
+# (1-indexing to match schematic):
+## missing indices are either +5/+3.3V or GND
+set_io		A[2]			M1	#2
+set_io		A[3]			L1	#3
+set_io		A[5]			J1	#5
+set_io		A[6]			J3	#6
+set_io		A[8]			G1	#8
+set_io		A[9]			G3	#9
+set_io		A[11]			E1	#11
+set_io		A[12]			D1	#12
+set_io		A[14]			C1	#14
+set_io		A[15]			B1	#15
+set_io		A[17]			D3	#17
+set_io		A[18]			C3	#18
+set_io		A[20]			A1	#20
+set_io		A[21]			A2	#21
+set_io		A[23]			A3	#23
+set_io		A[24]			A4	#24
+set_io		A[27]			A5	#27
+set_io		A[28]			C5	#28
+set_io		A[30]			D5	#30
+set_io		A[31]			C4	#31
+set_io		A[33]			D4	#33
+set_io		A[34]			E4	#34
+set_io		A[36]			F4	#36
+set_io		A[37]			F3	#37
+set_io		A[39]			H4	#39
+set_io		A[40]			G4	#40
+set_io		A[42]			H1	#42
+set_io		A[43]			H3	#43
+set_io		A[45]			K3	#45
+set_io		A[46]			K4	#46
+set_io		A[48]			N1	#48
+set_io		A[49]			P1	#49
+
+# IO Bank B
+set_io		A[2]			A6  #2   
+set_io		A[3]			A7  #3
+set_io		A[5]			A10 #5
+set_io		A[6]			A11 #6
+set_io		A[8]			C9  #8
+set_io		A[9]			C10 #9
+set_io		A[11]			A12 #11
+set_io		A[12]			B14 #12
+set_io		A[14]			C14 #14
+set_io		A[15]			D14 #15
+set_io		A[17]			E14 #17
+set_io		A[18]			E12 #18
+set_io		A[20]			F14 #20
+set_io		A[21]			G14 #21
+set_io		A[23]			H12 #23
+set_io		A[24]			J12 #24
+set_io		A[27]			H11 #27
+set_io		A[28]			G11 #28
+set_io		A[30]			G12 #30
+set_io		A[31]			F12 #31
+set_io		A[33]			F11 #33
+set_io		A[34]			E11 #34
+set_io		A[36]			D12 #36
+set_io		A[37]			D11 #37
+set_io		A[39]			C12 #39
+set_io		A[40]			C11 #40
+set_io		A[42]			D10 #42
+set_io		A[43]			D9  #43
+set_io		A[45]			D7  #45
+set_io		A[46]			D6  #46
+set_io		A[48]			C7  #48
+set_io		A[49]			C6  #49
+
+# IO Bank C:
+set_io		A[2]			M3	#2	
+set_io		A[3]			M4	#3
+set_io		A[5]			L4	#5
+set_io		A[6]			L5	#6
+set_io		A[8]			M6	#8
+set_io		A[9]			M7	#9
+set_io		A[11]			L9	#11
+set_io		A[39]			P10	#39
+set_io		A[40]			P9	#40
+set_io		A[42]			L8	#42
+set_io		A[43]			L6	#43
+set_io		A[45]			P5	#45
+set_io		A[46]			P4	#46
+set_io		A[48]			P4	#48
+set_io		A[49]			P2	#49
+
+# IO Bank D:
+set_io		A[2]			K12	#LED2
+set_io		A[3]			K14	#LED3
+set_io		A[5]			M12	#LED6
+set_io		A[6]			N14	#LED7
+set_io		A[14]			P14 #USB_TXD
+set_io		A[15]			M9 	#USB_RXD
+set_io		A[23]			P11 #ICE_MISO
+set_io		A[24]			M11 #ICE_MOSI
+set_io		A[27]			P12 #ICE_SCK
+set_io		A[28]			P13	#ICE_SS
+set_io		A[36]			L10 #ICE_CRESET (already pulled up)
+set_io		A[37]			M10 #ICE_CDONE
+set_io		A[39]			P8	#RESET (already pulled up)
+set_io		A[40]			P7	#100MHZ
+set_io		A[45]			L14 #LED5
+set_io		A[46]			L12	#LED4
+set_io		A[48]			K11	#LED1 
+set_io		A[49]			J11	#LED0
