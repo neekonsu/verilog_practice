@@ -7,19 +7,23 @@ module cascade (
 	output reg [7:0] leds
 );
 
-wire trigger;
+wire enable;
 
-timer delay (
+varclock #(
+	.STATE_WIDTH(15),
+	.CLOCK_CYCLES(1_000_000)
+) slowclk (
 	.rst(rst),
 	.clk(clk),
-	.trigger(trigger)
+	.trigger(enable)
 );
 
-always @ (posedge trigger) begin
-	if (leds == 8'b1 || rst == 1'b0) begin
+always @ (posedge enable) begin
+	if (leds == 8'b1) begin
 		leds <= 8'b0;
 	end else begin
-		leds <= leds + 1'b1;
+		//leds <= leds + 1'b1;
+		leds <= 8'b11111111;
 	end
 end
 
