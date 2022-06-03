@@ -1,24 +1,29 @@
 // Timer module handles triggering a timed event
-module varclock #(
-	parameter STATE_WIDTH = 15,						// Bus width for the internal counter
-	parameter CLOCK_CYCLES = 100_000_000 	// Upper inclusive limit of clock cycles
-)
-(
+`timescale 1ns/100ps
+
+module varclock (
 	input clk,
 	input rst,
 
-	output wire trigger
+	output reg trigger
 );
 
-reg [STATE_WIDTH:0] state;
-assign trigger = (CLOCK_CYCLES == state);
+parameter LIMIT = 100_000_000;
+parameter WIDTH = 32;
 
-always @(negedge rst) begin
-	state <= STATE_WIDTH'b0;
-end
+reg [WIDTH-1:0] counter;
 
-always @(posedge clk) begin	
-	state <= state + 1;
+always @ (posedge clk) begin
+	if (~rst) begin
+		counter <= 0;
+		trigger <= 0;
+	end else if (counter == LIMIT) begin
+		counter <= 0;
+		trigger <= 1;
+	end else begin
+		counter <= counter + 1;
+		trigger <= 0;
+	end
 end
 
 endmodule

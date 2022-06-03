@@ -1,0 +1,95 @@
+#! /usr/bin/vvp
+:ivl_version "11.0 (stable)" "(v11_0)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "/usr/lib/ivl/system.vpi";
+:vpi_module "/usr/lib/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/lib/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/lib/ivl/v2005_math.vpi";
+:vpi_module "/usr/lib/ivl/va_math.vpi";
+S_0x55cf16f14140 .scope module, "cascade" "cascade" 2 4;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 1 "rst";
+    .port_info 1 /INPUT 1 "clk";
+    .port_info 2 /OUTPUT 8 "leds";
+o0x7f4a90f2e018 .functor BUFZ 1, C4<z>; HiZ drive
+v0x55cf16f29ae0_0 .net "clk", 0 0, o0x7f4a90f2e018;  0 drivers
+v0x55cf16f29b80_0 .net "enable", 0 0, L_0x55cf16f29e30;  1 drivers
+v0x55cf16f29c50_0 .var "leds", 7 0;
+o0x7f4a90f2e048 .functor BUFZ 1, C4<z>; HiZ drive
+v0x55cf16f29d20_0 .net "rst", 0 0, o0x7f4a90f2e048;  0 drivers
+S_0x55cf16f14320 .scope module, "slowclk" "varclock" 2 18, 3 4 0, S_0x55cf16f14140;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 1 "clk";
+    .port_info 1 /INPUT 1 "rst";
+    .port_info 2 /OUTPUT 1 "trigger";
+v0x55cf16f03850_0 .net "clk", 0 0, o0x7f4a90f2e018;  alias, 0 drivers
+v0x55cf16f29820_0 .net "rst", 0 0, o0x7f4a90f2e048;  alias, 0 drivers
+v0x55cf16f298e0_0 .var "state", 17 0;
+v0x55cf16f299a0_0 .net "trigger", 0 0, L_0x55cf16f29e30;  alias, 1 drivers
+E_0x55cf16f183d0 .event posedge, v0x55cf16f03850_0;
+E_0x55cf16f17cd0 .event negedge, v0x55cf16f29820_0;
+E_0x55cf16f00020 .event posedge, v0x55cf16f299a0_0;
+L_0x55cf16f29e30 .part v0x55cf16f298e0_0, 17, 1;
+    .scope S_0x55cf16f14320;
+T_0 ;
+    %pushi/vec4 0, 0, 18;
+    %assign/vec4 v0x55cf16f298e0_0, 0;
+    %end;
+    .thread T_0;
+    .scope S_0x55cf16f14320;
+T_1 ;
+    %wait E_0x55cf16f00020;
+    %pushi/vec4 0, 0, 18;
+    %assign/vec4 v0x55cf16f298e0_0, 0;
+    %jmp T_1;
+    .thread T_1;
+    .scope S_0x55cf16f14320;
+T_2 ;
+    %wait E_0x55cf16f17cd0;
+    %pushi/vec4 0, 0, 18;
+    %assign/vec4 v0x55cf16f298e0_0, 0;
+    %jmp T_2;
+    .thread T_2;
+    .scope S_0x55cf16f14320;
+T_3 ;
+    %wait E_0x55cf16f183d0;
+    %load/vec4 v0x55cf16f298e0_0;
+    %cmpi/e 1, 0, 18;
+    %jmp/0xz  T_3.0, 4;
+    %pushi/vec4 0, 0, 18;
+    %assign/vec4 v0x55cf16f298e0_0, 0;
+    %jmp T_3.1;
+T_3.0 ;
+    %load/vec4 v0x55cf16f298e0_0;
+    %addi 1, 0, 18;
+    %assign/vec4 v0x55cf16f298e0_0, 0;
+T_3.1 ;
+    %jmp T_3;
+    .thread T_3;
+    .scope S_0x55cf16f14140;
+T_4 ;
+    %vpi_call 2 13 "$dumpfile", "test.vcd" {0 0 0};
+    %end;
+    .thread T_4;
+    .scope S_0x55cf16f14140;
+T_5 ;
+    %wait E_0x55cf16f00020;
+    %load/vec4 v0x55cf16f29c50_0;
+    %cmpi/e 255, 0, 8;
+    %jmp/0xz  T_5.0, 4;
+    %pushi/vec4 0, 0, 8;
+    %assign/vec4 v0x55cf16f29c50_0, 0;
+    %jmp T_5.1;
+T_5.0 ;
+    %pushi/vec4 255, 0, 8;
+    %assign/vec4 v0x55cf16f29c50_0, 0;
+T_5.1 ;
+    %jmp T_5;
+    .thread T_5;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "cascade.v";
+    "./../TIMER/timer.v";
