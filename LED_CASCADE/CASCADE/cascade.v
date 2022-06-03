@@ -31,7 +31,7 @@ varclock #(
 );
 
 
-always @ (posedge enable or posedge rst) begin
+always @ (posedge enable) begin
 	if (r_state == 8'b00000001) begin
 		r_state <= 8'b10000000;
 	end else begin
