@@ -1,17 +1,23 @@
+`include "../DRIVER/driver.sv"
+
 module test (
 	input clk,
 	input rst,
 
-	output leds[0]
+	output leds
 );
 
+reg led_out;
+
+assign leds[0] = led_out;
+
 driver #(
-	.DUTY_CYCLE(0.5),
-	.PERIOD(10)
+	.DUTY_CYCLE(200),
+	.PERIOD(255)
 ) pwm (
 	.i_clk(clk),
 	.i_rst(rst),
-	.o_clk(leds[0])
+	.pwm_out(led_out)
 );
 
 endmodule
